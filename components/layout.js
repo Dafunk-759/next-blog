@@ -4,14 +4,14 @@ import styles from "./layout.module.css"
 import utilStyles from "../styles/utils.module.css"
 import Link from "next/link"
 
-const name = "dafunk"
-export const siteTitle = "Next.js Sample Website"
+const name = "JQ"
+export const siteTitle = "Blog"
 
 export function Layout({ children, home }) {
   return (
     <div className={styles.container}>
       <Head>
-        <link rel="icon" href="/favicon.ico" />
+        <Favicon />
         <Metas />
       </Head>
       <Header home={home} />
@@ -24,6 +24,33 @@ export function Layout({ children, home }) {
         </div>
       )}
     </div>
+  )
+}
+
+function Favicon() {
+  const pre = path => "/favicon" + path
+
+  return (
+    <>
+      <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href={pre("/apple-touch-icon.png")}
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href={pre("/favicon-32x32.png")}
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href={pre("/favicon-16x16.png")}
+      />
+      <link rel="manifest" href={pre("/site.webmanifest")} />
+    </>
   )
 }
 
