@@ -5,7 +5,13 @@ import { Layout, siteTitle } from "../components/layout"
 import utilStyles from "../styles/utils.module.css"
 import { getSortedPostsData } from "../lib/posts"
 
-export default function Home({ allPostsData }) {
+type PostData = {
+  date: string
+  title: string
+  id: string
+}
+
+export default function Home({ allPostsData }: { allPostsData: PostData[] }) {
   return (
     <Layout home={true}>
       <Head>
@@ -20,7 +26,7 @@ export default function Home({ allPostsData }) {
   )
 }
 
-function Posts({ allPostsData }) {
+function Posts({ allPostsData }: { allPostsData: PostData[] }) {
   return (
     <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
       <h2 className={utilStyles.headingLg}>Blog</h2>
@@ -33,7 +39,7 @@ function Posts({ allPostsData }) {
   )
 }
 
-function PostItem({ id, title, date }) {
+function PostItem({ id, title, date }: PostData) {
   return (
     <li className={utilStyles.listItem}>
       <Link href={`/posts/${id}`}>
@@ -48,7 +54,7 @@ function PostItem({ id, title, date }) {
 }
 
 export async function getStaticProps() {
-  const allPostsData = await getSortedPostsData().catch(_ => [])
+  const allPostsData = await getSortedPostsData()
 
   return {
     props: {

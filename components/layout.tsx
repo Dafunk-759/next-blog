@@ -1,3 +1,5 @@
+import type { ReactNode } from "react"
+
 import Head from "next/head"
 import Image from "next/image"
 import styles from "./layout.module.css"
@@ -7,7 +9,12 @@ import Link from "next/link"
 const name = "JQ"
 export const siteTitle = "Blog"
 
-export function Layout({ children, home }) {
+export type LayoutProps = {
+  children: ReactNode
+  home?: boolean
+}
+
+export function Layout({ children, home }: LayoutProps) {
   return (
     <div className={styles.container}>
       <Head>
@@ -28,7 +35,7 @@ export function Layout({ children, home }) {
 }
 
 function Favicon() {
-  const pre = path => "/favicon" + path
+  const pre = (path: string) => "/favicon" + path
 
   return (
     <>
@@ -57,10 +64,7 @@ function Favicon() {
 function Metas() {
   return (
     <>
-      <meta
-        name="description"
-        content="A blog about javascript."
-      />
+      <meta name="description" content="A blog about javascript." />
       <meta
         property="og:image"
         content={`https://og-image.vercel.app/${encodeURI(
@@ -73,7 +77,11 @@ function Metas() {
   )
 }
 
-function Header({ home }) {
+type HeaderProps = {
+  home?: boolean
+}
+
+function Header({ home }: HeaderProps) {
   const avator = (
     <>
       <Image

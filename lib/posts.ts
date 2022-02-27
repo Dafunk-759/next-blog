@@ -17,12 +17,12 @@ export async function getSortedPostsData() {
 
     return fs.readFile(fullPath, "utf8").then(fileContents => {
       // Use gray-matter to parse the post metadata section
-      const matterResult = matter(fileContents)
+      const { data } = matter(fileContents)
 
       // Combine the data with the id
       return {
         id,
-        ...matterResult.data
+        ...(data as { date: string; title: string })
       }
     })
   })
@@ -66,7 +66,7 @@ export async function getAllPostIds() {
   })
 }
 
-export async function getPostData(id) {
+export async function getPostData(id: string) {
   const fullPath = path.join(postsDirectory, `${id}.md`)
   const fileContents = await fs.readFile(fullPath, "utf8")
 
@@ -83,6 +83,6 @@ export async function getPostData(id) {
   return {
     id,
     contentHtml,
-    ...matterResult.data
+    ...(matterResult.data as { title: string; date: string })
   }
 }
