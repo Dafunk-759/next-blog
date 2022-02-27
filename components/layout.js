@@ -59,7 +59,7 @@ function Metas() {
     <>
       <meta
         name="description"
-        content="Learn how to build a personal website using Next.js"
+        content="A blog about javascript."
       />
       <meta
         property="og:image"
